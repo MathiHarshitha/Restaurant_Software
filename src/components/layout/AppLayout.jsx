@@ -11,7 +11,7 @@ export default function AppLayout() {
   if (!user) return <Navigate to="/login" replace />;
 
   return (
-    <div className="flex h-screen overflow-hidden bg-ink-50">
+    <div className="flex h-screen overflow-hidden" style={{ background: '#f8f6f3' }}>
       <Sidebar />
       <main className="flex flex-1 flex-col overflow-y-auto">
         <div className="flex-1 px-8 py-7">

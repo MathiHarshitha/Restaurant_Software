@@ -30,9 +30,9 @@ const INSIGHT_ICONS = {
 };
 
 const TONE_STYLES = {
-  positive: { bg: 'bg-emerald-50', border: 'border-emerald-100', icon: 'text-emerald-600', iconBg: 'bg-emerald-100' },
-  warning: { bg: 'bg-amber-50', border: 'border-amber-100', icon: 'text-amber-700', iconBg: 'bg-amber-100' },
-  neutral: { bg: 'bg-ink-50', border: 'border-ink-200', icon: 'text-brand-600', iconBg: 'bg-brand-50' },
+  positive: { bg: 'bg-emerald-50',   border: 'border-emerald-100', icon: 'text-emerald-700', iconBg: 'bg-emerald-100' },
+  warning:  { bg: 'bg-amber-50',     border: 'border-amber-100',   icon: 'text-amber-700',   iconBg: 'bg-amber-100' },
+  neutral:  { bg: 'bg-cream-200/40', border: 'border-gold-400/30', icon: 'text-maroon-600',  iconBg: 'bg-gold-50' },
 };
 
 function StatCard({ label, value, delta, deltaLabel, loading }) {
@@ -161,7 +161,7 @@ export default function Reports() {
                         </div>
                         <div className="mt-1 flex items-center gap-2">
                           <div className="h-1 flex-1 bg-ink-100 rounded-full overflow-hidden">
-                            <div className="h-full bg-brand-500 rounded-full" style={{ width: `${item.share.toFixed(1)}%` }} />
+                            <div className="h-full rounded-full" style={{ width: `${item.share.toFixed(1)}%`, background: '#7A1E23' }} />
                           </div>
                           <span className="num text-xs text-ink-500 w-16 text-right">{formatNumber(item.quantity)} sold</span>
                         </div>

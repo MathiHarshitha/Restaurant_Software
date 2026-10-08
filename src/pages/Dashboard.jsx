@@ -24,9 +24,9 @@ const TREND_RANGES = [
 ];
 
 const TONE_STYLES = {
-  positive: { bg: 'bg-emerald-50', border: 'border-emerald-100', icon: 'text-emerald-600', iconBg: 'bg-emerald-100' },
-  warning: { bg: 'bg-amber-50', border: 'border-amber-100', icon: 'text-amber-700', iconBg: 'bg-amber-100' },
-  neutral: { bg: 'bg-ink-50', border: 'border-ink-200', icon: 'text-brand-600', iconBg: 'bg-brand-50' },
+  positive: { bg: 'bg-emerald-50',    border: 'border-emerald-100', icon: 'text-emerald-700', iconBg: 'bg-emerald-100' },
+  warning:  { bg: 'bg-amber-50',      border: 'border-amber-100',   icon: 'text-amber-700',   iconBg: 'bg-amber-100' },
+  neutral:  { bg: 'bg-cream-200/40',  border: 'border-gold-400/30', icon: 'text-maroon-600',  iconBg: 'bg-gold-50' },
 };
 
 const INSIGHT_ICONS = {
@@ -73,15 +73,15 @@ function InsightCard({ insight }) {
 }
 
 function HealthBar({ label, score }) {
-  const color = score >= 80 ? 'bg-emerald-500' : score >= 60 ? 'bg-brand-500' : 'bg-amber-500';
+  const barColor = score >= 80 ? '#1baf7a' : score >= 60 ? '#7A1E23' : '#C3542E';
   return (
     <div>
       <div className="mb-1 flex justify-between text-[13px]">
         <span className="text-ink-700">{label}</span>
         <span className="num font-semibold text-ink-900">{score}</span>
       </div>
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-ink-100">
-        <div className={cn('h-full rounded-full transition-all', color)} style={{ width: `${score}%` }} />
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-cream-200">
+        <div className="h-full rounded-full transition-all" style={{ width: `${score}%`, background: barColor }} />
       </div>
     </div>
   );
@@ -103,7 +103,7 @@ export default function Dashboard() {
     <div>
       <PageHeader
         title={`${greeting()}, ${user?.name ?? 'Chef'}!`}
-        subtitle={`${formatMonthYear(new Date())} · Connect Dhaba`}
+        subtitle={`${formatMonthYear(new Date())} · Connect Family Restaurant & Dhaba`}
         actions={
           <button className="btn-primary" onClick={() => navigate('/billing')}>
             <Receipt size={16} />
@@ -172,7 +172,7 @@ export default function Dashboard() {
                         </div>
                         <div className="mt-1 flex items-center gap-2">
                           <div className="h-1 flex-1 overflow-hidden rounded-full bg-ink-100">
-                            <div className="h-full rounded-full bg-brand-500" style={{ width: `${pct}%` }} />
+                            <div className="h-full rounded-full" style={{ width: `${pct}%`, background: '#7A1E23' }} />
                           </div>
                           <span className="num text-xs text-ink-500 w-14 text-right">{formatNumber(item.quantity)} sold</span>
                         </div>

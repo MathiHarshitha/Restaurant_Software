@@ -15,7 +15,7 @@ export function PageHeader({ title, subtitle, actions, eyebrow }) {
   );
 }
 
-/** Up/down change indicator. Colour is paired with an arrow and sign, never colour alone. */
+/** Delta badge — colour plus icon plus sign, never colour alone. */
 export function DeltaBadge({ value, invert = false, className }) {
   if (value === null || value === undefined || !Number.isFinite(value)) {
     return <span className={cn('badge-neutral', className)}>No comparison</span>;
@@ -45,7 +45,7 @@ export function EmptyState({ icon: Icon, title, description, action }) {
   return (
     <div className="flex flex-col items-center justify-center px-6 py-12 text-center">
       {Icon && (
-        <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-ink-100 text-ink-500">
+        <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-cream-200 text-maroon-600">
           <Icon size={20} />
         </div>
       )}
@@ -57,7 +57,7 @@ export function EmptyState({ icon: Icon, title, description, action }) {
 }
 
 export function Skeleton({ className }) {
-  return <div className={cn('animate-pulse rounded-lg bg-ink-100', className)} />;
+  return <div className={cn('animate-pulse rounded-lg bg-cream-200/80', className)} />;
 }
 
 export function CardHeader({ title, subtitle, right, className }) {

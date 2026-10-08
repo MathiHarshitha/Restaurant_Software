@@ -7,14 +7,15 @@ import { cn } from '../../utils/cn';
 import { logout } from '../../store/authSlice';
 import { selectIsOnline, setSimulatedOffline } from '../../store/connectivitySlice';
 import { usePendingBillCount, useRestaurant } from '../../hooks/useData';
+import logoSrc from '/logo.jpeg';
 
 const NAV = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/billing', icon: Receipt, label: 'Billing' },
-  { to: '/menu', icon: UtensilsCrossed, label: 'Menu' },
-  { to: '/bills', icon: FileText, label: 'Bills' },
-  { to: '/reports', icon: BarChart2, label: 'Reports' },
-  { to: '/settings', icon: Settings, label: 'Settings' },
+  { to: '/billing',   icon: Receipt,         label: 'Billing' },
+  { to: '/menu',      icon: UtensilsCrossed, label: 'Menu' },
+  { to: '/bills',     icon: FileText,        label: 'Bills' },
+  { to: '/reports',   icon: BarChart2,       label: 'Reports' },
+  { to: '/settings',  icon: Settings,        label: 'Settings' },
 ];
 
 export default function Sidebar() {
@@ -31,41 +32,51 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="flex h-full w-[220px] shrink-0 flex-col border-r border-ink-900/[0.06] bg-brand-900">
+    <aside className="flex h-full w-[228px] shrink-0 flex-col" style={{ background: '#282623' }}>
       {/* Logo */}
-      <div className="px-5 py-5">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white">
-            <UtensilsCrossed size={16} />
-          </div>
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-widest text-white/50">Restaurant</p>
-            <p className="text-[13px] font-bold leading-none text-white">Billing</p>
-          </div>
+      <div className="flex flex-col items-center px-4 py-5 border-b border-white/10">
+        <img
+          src={logoSrc}
+          alt="Connect Family Restaurant & Dhaba"
+          className="h-[72px] w-auto object-contain"
+          draggable={false}
+        />
+        <div className="mt-2 text-center">
+          <p className="text-[11px] font-bold uppercase tracking-widest leading-none" style={{ color: '#D4AF6B' }}>
+            Billing & Management
+          </p>
         </div>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 space-y-0.5 px-2.5 py-2">
+      <nav className="flex-1 space-y-0.5 px-2.5 py-3">
         {NAV.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
               cn(
-                'group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                'group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all',
                 isActive
-                  ? 'bg-white/10 text-white'
-                  : 'text-white/60 hover:bg-white/8 hover:text-white',
+                  ? 'text-white'
+                  : 'text-white/55 hover:text-white/90',
               )
             }
+            style={({ isActive }) => isActive ? { background: '#7A1E23', boxShadow: '0 1px 4px #7A1E2360' } : {}}
           >
             {({ isActive }) => (
               <>
-                <Icon size={17} strokeWidth={isActive ? 2.2 : 1.8} />
+                <Icon
+                  size={17}
+                  strokeWidth={isActive ? 2.2 : 1.8}
+                  style={isActive ? { color: '#D4AF6B' } : {}}
+                />
                 <span className="flex-1">{label}</span>
                 {label === 'Bills' && pending > 0 && (
-                  <span className="flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-amber-400 px-1 text-[10px] font-bold text-amber-900">
+                  <span
+                    className="flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 text-[10px] font-bold"
+                    style={{ background: '#D4AF6B', color: '#282623' }}
+                  >
                     {pending > 99 ? '99+' : pending}
                   </span>
                 )}
@@ -75,20 +86,29 @@ export default function Sidebar() {
         ))}
       </nav>
 
+      {/* Gold divider */}
+      <div className="mx-4 h-px" style={{ background: 'linear-gradient(90deg,transparent,#D4AF6B50,transparent)' }} />
+
       {/* Bottom section */}
-      <div className="border-t border-white/10 px-2.5 py-3 space-y-1">
-        {/* Restaurant profile */}
+      <div className="px-2.5 py-3 space-y-1">
+        {/* Restaurant info */}
         <div className="px-3 py-2">
-          <p className="text-[12px] font-semibold text-white truncate">{restaurant?.name || 'Connect Dhaba'}</p>
-          <p className="text-[11px] text-white/50 truncate">{restaurant?.address?.split(',')[0]}</p>
+          <p className="text-[12px] font-semibold text-white truncate">
+            {restaurant?.name || 'Connect Family Restaurant & Dhaba'}
+          </p>
+          {restaurant?.address && (
+            <p className="text-[11px] truncate" style={{ color: '#D4AF6B80' }}>
+              {restaurant.address.split(',')[0]}
+            </p>
+          )}
         </div>
 
-        {/* Online/offline status — double-click to simulate offline for demo */}
+        {/* Online/offline — double-click to simulate offline for demo */}
         <button
           type="button"
           title="Double-click to simulate offline mode"
           onDoubleClick={() => dispatch(setSimulatedOffline(!simOffline))}
-          className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left transition-colors hover:bg-white/8"
+          className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left transition-colors hover:bg-white/6"
         >
           {isOnline ? (
             <Wifi size={15} className="text-emerald-400" />
@@ -99,7 +119,7 @@ export default function Sidebar() {
             {isOnline ? 'Online' : simOffline ? 'Offline (Demo)' : 'Offline'}
           </span>
           {pending > 0 && (
-            <span className="ml-auto text-[11px] text-white/40">{pending} pending</span>
+            <span className="ml-auto text-[11px]" style={{ color: '#D4AF6B80' }}>{pending} pending</span>
           )}
         </button>
 
@@ -107,7 +127,7 @@ export default function Sidebar() {
         <button
           type="button"
           onClick={handleLogout}
-          className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-white/50 transition-colors hover:bg-white/8 hover:text-white"
+          className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-white/40 transition-colors hover:bg-white/6 hover:text-white/80"
         >
           <LogOut size={15} />
           <span className="text-[13px]">Sign Out</span>

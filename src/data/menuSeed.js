@@ -60,10 +60,10 @@ export const MENU_SEED = [
 ];
 
 export const RESTAURANT_SEED = {
-  name: 'Connect Dhaba',
-  tagline: 'Pure taste since 1998',
+  name: 'Connect Family Restaurant & Dhaba',
+  tagline: 'Pure taste. Real flavour.',
   address: '12-2-417, Main Road, Ameerpet, Hyderabad 500016',
   phone: '040 2374 5566',
   gstin: '36AABFS4821K1Z5',
-  receiptFooter: 'Thank You. Visit Again.',
+  receiptFooter: 'Thank You. Visit Again. — Connect Dhaba',
 };

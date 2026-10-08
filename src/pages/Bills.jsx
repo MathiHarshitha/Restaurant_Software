@@ -121,7 +121,7 @@ export default function Bills() {
                 </tr>
               ) : rows.map((b) => (
                 <tr key={b.id} className="hover:bg-ink-50/50 transition-colors">
-                  <td className="table-td font-mono font-medium text-brand-700 text-xs">{b.billNumber}</td>
+                  <td className="table-td font-mono font-medium text-maroon-600 text-xs">{b.billNumber}</td>
                   <td className="table-td text-ink-600">{formatDate(b.billedAt)}</td>
                   <td className="table-td text-ink-600 num">{formatTime(b.billedAt)}</td>
                   <td className="table-td text-ink-600">

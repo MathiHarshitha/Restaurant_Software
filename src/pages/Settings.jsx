@@ -115,7 +115,7 @@ export default function Settings() {
             {resetBusy && (
               <div className="mb-3">
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-ink-100">
-                  <div className="h-full rounded-full bg-brand-500 transition-all" style={{ width: `${Math.round(resetProgress * 100)}%` }} />
+                  <div className="h-full rounded-full transition-all" style={{ width: `${Math.round(resetProgress * 100)}%`, background: '#7A1E23' }} />
                 </div>
                 <p className="mt-1 text-xs text-ink-500 text-center">Resetting… {Math.round(resetProgress * 100)}%</p>
               </div>

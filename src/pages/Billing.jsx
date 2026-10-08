@@ -25,8 +25,8 @@ function ItemCard({ item, quantity, onClick }) {
       onClick={onClick}
       className={cn(
         'group relative flex flex-col items-start rounded-xl border p-3 text-left transition-all',
-        'bg-white hover:border-brand-400 hover:shadow-md focus-visible:ring-2 focus-visible:ring-brand-400',
-        quantity ? 'border-brand-400 shadow-sm' : 'border-ink-200',
+        'bg-white hover:border-gold-400 hover:shadow-md focus-visible:ring-2 focus-visible:ring-gold-400',
+        quantity ? 'border-gold-400 shadow-sm' : 'border-ink-200',
         !item.isAvailable && 'opacity-40 pointer-events-none',
       )}
     >
@@ -36,7 +36,7 @@ function ItemCard({ item, quantity, onClick }) {
       </div>
       <p className="mt-1.5 num text-sm font-semibold text-ink-900">{formatCurrency(item.price)}</p>
       {quantity > 0 && (
-        <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-brand-500 text-[10px] font-bold text-white num">
+        <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold num" style={{ background: '#7A1E23', color: '#F7EAD6' }}>
           {quantity}
         </span>
       )}
@@ -149,9 +149,10 @@ export default function Billing() {
               type="button"
               onClick={() => setCategory(c)}
               className={cn(
-                'rounded-lg px-3 py-1.5 text-[13px] font-medium transition-colors',
-                category === c ? 'bg-brand-900 text-white' : 'bg-white text-ink-600 ring-1 ring-ink-200 hover:bg-ink-50',
+                'rounded-lg px-3 py-1.5 text-[13px] font-medium transition-all',
+                category !== c && 'bg-white text-ink-600 ring-1 ring-gold-400/30 hover:bg-cream-200/50',
               )}
+              style={category === c ? { background: '#7A1E23', color: '#F7EAD6' } : {}}
             >
               {c}
             </button>
@@ -182,7 +183,7 @@ export default function Billing() {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-ink-100 px-4 py-3.5">
           <div className="flex items-center gap-2">
-            <ReceiptIcon size={16} className="text-brand-600" />
+            <ReceiptIcon size={16} className="text-maroon-600" />
             <span className="text-sm font-semibold text-ink-900">Current Order</span>
             {cart.lines.length > 0 && <span className="badge-neutral num">{totals.itemCount} items</span>}
           </div>
@@ -270,7 +271,7 @@ export default function Billing() {
                   className={cn(
                     'flex-1 rounded-lg border py-2 text-xs font-semibold transition-colors',
                     cart.paymentMethod === m.id
-                      ? 'border-brand-500 bg-brand-50 text-brand-700'
+                      ? 'border-gold-400 bg-cream-200/60 text-maroon-700'
                       : 'border-ink-200 bg-white text-ink-600 hover:bg-ink-50',
                   )}
                   onClick={() => dispatch(setPaymentMethod(m.id))}

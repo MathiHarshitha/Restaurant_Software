@@ -28,7 +28,7 @@ export default function PeakHoursChart({ hours = [], peakStart = 19, peakEnd = 2
                 <p className="font-semibold text-ink-900">{formatHour(d.hour)}</p>
                 <p className="text-ink-500">{d.orders} orders · avg {(d.orders / 30).toFixed(1)}/day</p>
                 {d.hour >= peakStart && d.hour < peakEnd && (
-                  <p className="mt-1 font-medium text-brand-600">Peak period</p>
+                  <p className="mt-1 font-medium text-maroon-600">Peak period</p>
                 )}
               </div>
             );

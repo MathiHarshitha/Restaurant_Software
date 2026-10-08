@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, UtensilsCrossed } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { login } from '../store/authSlice';
+import logoSrc from '/logo.jpeg';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -24,40 +25,56 @@ export default function Login() {
 
   return (
     <div className="flex min-h-screen">
-      {/* Left brand panel */}
-      <div className="hidden w-[480px] shrink-0 flex-col justify-between bg-brand-900 p-12 lg:flex">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10">
-            <UtensilsCrossed size={20} className="text-white" />
-          </div>
-          <span className="text-base font-semibold text-white">Restaurant Billing</span>
+      {/* ── Left brand panel ── */}
+      <div
+        className="hidden w-[460px] shrink-0 flex-col justify-between p-10 lg:flex"
+        style={{ background: '#282623' }}
+      >
+        {/* Logo */}
+        <div className="flex justify-center pt-4">
+          <img
+            src={logoSrc}
+            alt="Connect Family Restaurant & Dhaba"
+            className="h-[160px] w-auto object-contain"
+            draggable={false}
+          />
         </div>
-        <div>
-          <h2 className="text-4xl font-bold leading-tight tracking-tight text-white">
+
+        {/* Tagline */}
+        <div className="pb-4">
+          {/* Gold rule */}
+          <div className="mb-6 h-px" style={{ background: 'linear-gradient(90deg,transparent,#D4AF6B,transparent)' }} />
+          <h2 className="text-[36px] font-bold leading-tight tracking-tight" style={{ color: '#F7EAD6' }}>
             Bill faster.<br />
             Work offline.<br />
             Know your business.
           </h2>
-          <p className="mt-4 text-base text-white/55 leading-relaxed">
-            A modern POS and analytics platform built for Indian restaurant owners — works even when the internet doesn't.
+          <p className="mt-4 text-base leading-relaxed" style={{ color: '#D4AF6B80' }}>
+            A modern POS &amp; analytics platform built for Indian restaurant owners — works even when the internet doesn't.
           </p>
         </div>
+
+        {/* Bottom credits */}
         <div className="flex items-center gap-3">
-          <div className="h-px flex-1 bg-white/10" />
-          <span className="text-xs text-white/30">Demo Version · 2026</span>
-          <div className="h-px flex-1 bg-white/10" />
+          <div className="h-px flex-1" style={{ background: '#D4AF6B30' }} />
+          <span className="text-xs" style={{ color: '#D4AF6B60' }}>Demo Version · 2026</span>
+          <div className="h-px flex-1" style={{ background: '#D4AF6B30' }} />
         </div>
       </div>
 
-      {/* Right login form */}
-      <div className="flex flex-1 flex-col items-center justify-center bg-ink-50 p-8">
+      {/* ── Right login form ── */}
+      <div className="flex flex-1 flex-col items-center justify-center p-8" style={{ background: '#F7EAD620', backdropFilter: 'none' }}>
         <div className="w-full max-w-sm">
+          {/* Mobile logo */}
+          <div className="mb-6 flex justify-center lg:hidden">
+            <img src={logoSrc} alt="Connect Dhaba" className="h-24 w-auto" />
+          </div>
+
           <div className="mb-8 text-center">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-900 lg:hidden">
-              <UtensilsCrossed size={22} className="text-white" />
-            </div>
-            <h1 className="text-2xl font-bold tracking-tight text-ink-900">Connect Dhaba</h1>
-            <p className="mt-1.5 text-sm text-ink-500">Restaurant Billing &amp; Management</p>
+            <h1 className="text-2xl font-bold tracking-tight" style={{ color: '#282623' }}>
+              Connect Family Restaurant &amp; Dhaba
+            </h1>
+            <p className="mt-1.5 text-sm" style={{ color: '#8B5E3C' }}>Restaurant Billing &amp; Management</p>
           </div>
 
           <form onSubmit={handleSubmit} className="card card-pad space-y-4">
@@ -68,7 +85,7 @@ export default function Login() {
                 type="text"
                 autoComplete="username"
                 className="input"
-                placeholder="owner@srilakshmi.in"
+                placeholder="owner@connectdhaba.in"
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 required
@@ -112,8 +129,11 @@ export default function Login() {
             </button>
           </form>
 
-          <p className="mt-4 text-center text-xs text-ink-400">
-            Demo credentials: <span className="font-mono text-ink-600">owner@srilakshmi.in</span> / <span className="font-mono text-ink-600">demo1234</span>
+          {/* Gold line below form */}
+          <div className="mt-4 h-px" style={{ background: 'linear-gradient(90deg,transparent,#D4AF6B80,transparent)' }} />
+
+          <p className="mt-3 text-center text-xs" style={{ color: '#8B5E3C' }}>
+            Demo: <span className="font-mono">owner@srilakshmi.in</span> / <span className="font-mono">demo1234</span>
           </p>
         </div>
       </div>

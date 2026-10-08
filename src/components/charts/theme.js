@@ -1,20 +1,27 @@
-// Chart tokens (validated reference palette). Categorical slots are assigned in fixed order
-// and follow the entity: UPI is always slot 1, Cash slot 2, Card slot 3 — everywhere.
+// Connect Dhaba brand chart palette
+// Primary series = Deep Maroon (high contrast, 11:1 on white)
+// Gold accents for secondary series and highlights
 export const CHART = {
-  series1: '#2a78d6',
-  series2: '#eb6834',
-  series3: '#1baf7a',
-  previous: '#c3c2b7',
-  grid: '#e1e0d9',
-  axis: '#898781',
-  highlight: '#2a78d6',
-  muted: '#cde2fb',
+  series1:  '#7A1E23',   // Deep Maroon — primary series (sales, revenue)
+  series2:  '#C3542E',   // Accent Orange — second series
+  series3:  '#8B5E3C',   // Earthy Brown — third series
+  series4:  '#D4AF6B',   // Warm Gold — fourth / UPI
+  previous: '#c2b9ac',   // muted comparison line
+  grid:     '#ede9e3',
+  axis:     '#9e9286',
+  highlight:'#7A1E23',
+  muted:    '#e0c9a0',   // soft gold fill for gradient
 };
 
-export const PAYMENT_COLORS = { upi: CHART.series1, cash: CHART.series2, card: CHART.series3 };
+// Payment method colours — each payment type owns a fixed hue everywhere
+export const PAYMENT_COLORS = {
+  upi:  '#7A1E23',   // Maroon
+  cash: '#8B5E3C',   // Brown
+  card: '#C3542E',   // Accent Orange
+};
 
 export const axisProps = {
-  tick: { fill: CHART.axis, fontSize: 12 },
+  tick:    { fill: CHART.axis, fontSize: 12 },
   tickLine: false,
   axisLine: false,
 };
