@@ -1,0 +1,122 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { Eye, EyeOff, UtensilsCrossed } from 'lucide-react';
+import { login } from '../store/authSlice';
+
+export default function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((s) => s.auth.user);
+  const { status, error } = useSelector((s) => s.auth);
+
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPw, setShowPw] = useState(false);
+
+  if (user) return <Navigate to="/dashboard" replace />;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await dispatch(login({ identifier, password }));
+    if (result.meta.requestStatus === 'fulfilled') navigate('/dashboard');
+  };
+
+  return (
+    <div className="flex min-h-screen">
+      {/* Left brand panel */}
+      <div className="hidden w-[480px] shrink-0 flex-col justify-between bg-brand-900 p-12 lg:flex">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10">
+            <UtensilsCrossed size={20} className="text-white" />
+          </div>
+          <span className="text-base font-semibold text-white">Restaurant Billing</span>
+        </div>
+        <div>
+          <h2 className="text-4xl font-bold leading-tight tracking-tight text-white">
+            Bill faster.<br />
+            Work offline.<br />
+            Know your business.
+          </h2>
+          <p className="mt-4 text-base text-white/55 leading-relaxed">
+            A modern POS and analytics platform built for Indian restaurant owners — works even when the internet doesn't.
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="h-px flex-1 bg-white/10" />
+          <span className="text-xs text-white/30">Demo Version · 2026</span>
+          <div className="h-px flex-1 bg-white/10" />
+        </div>
+      </div>
+
+      {/* Right login form */}
+      <div className="flex flex-1 flex-col items-center justify-center bg-ink-50 p-8">
+        <div className="w-full max-w-sm">
+          <div className="mb-8 text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-900 lg:hidden">
+              <UtensilsCrossed size={22} className="text-white" />
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight text-ink-900">Connect Dhaba</h1>
+            <p className="mt-1.5 text-sm text-ink-500">Restaurant Billing &amp; Management</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="card card-pad space-y-4">
+            <div>
+              <label className="label" htmlFor="identifier">Email / Username</label>
+              <input
+                id="identifier"
+                type="text"
+                autoComplete="username"
+                className="input"
+                placeholder="owner@srilakshmi.in"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label className="label" htmlFor="password">Password</label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPw ? 'text' : 'password'}
+                  autoComplete="current-password"
+                  className="input pr-10"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  tabIndex={-1}
+                  className="absolute inset-y-0 right-0 flex items-center px-3 text-ink-400 hover:text-ink-700"
+                  onClick={() => setShowPw(!showPw)}
+                  aria-label={showPw ? 'Hide password' : 'Show password'}
+                >
+                  {showPw ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
+            </div>
+
+            {error && (
+              <p className="rounded-lg bg-red-50 px-3 py-2.5 text-sm text-red-700 ring-1 ring-red-200">{error}</p>
+            )}
+
+            <button
+              type="submit"
+              className="btn-primary btn-lg w-full"
+              disabled={status === 'loading'}
+            >
+              {status === 'loading' ? 'Signing in…' : 'Sign In'}
+            </button>
+          </form>
+
+          <p className="mt-4 text-center text-xs text-ink-400">
+            Demo credentials: <span className="font-mono text-ink-600">owner@srilakshmi.in</span> / <span className="font-mono text-ink-600">demo1234</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

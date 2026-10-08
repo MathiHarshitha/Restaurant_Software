@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body { @apply bg-ink-50 text-ink-900 font-sans; font-feature-settings: 'cv11', 'ss01'; }
+  ::selection { @apply bg-brand-100; }
+  input[type='number']::-webkit-inner-spin-button { -webkit-appearance: none; }
+}
+
+@layer components {
+  .card { @apply bg-white rounded-xl shadow-card ring-1 ring-ink-900/[0.04]; }
+  .card-pad { @apply p-5; }
+  .card-title { @apply text-[15px] font-semibold text-ink-900 tracking-[-0.01em]; }
+  .card-sub { @apply text-[13px] text-ink-500; }
+
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 h-9 text-sm font-medium transition-colors
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-1
+    disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap; }
+  .btn-lg { @apply h-12 px-5 text-[15px] rounded-xl; }
+  .btn-sm { @apply h-8 px-2.5 text-[13px]; }
+  .btn-primary { @apply btn bg-brand-900 text-white hover:bg-brand-900/90; }
+  .btn-blue { @apply btn bg-brand-500 text-white hover:bg-brand-600; }
+  .btn-secondary { @apply btn bg-white text-ink-800 ring-1 ring-ink-200 hover:bg-ink-50; }
+  .btn-ghost { @apply btn text-ink-600 hover:bg-ink-100 hover:text-ink-900; }
+  .btn-danger { @apply btn bg-red-600 text-white hover:bg-red-700; }
+  .icon-btn { @apply inline-flex items-center justify-center h-8 w-8 rounded-lg text-ink-500 hover:bg-ink-100 hover:text-ink-900 transition-colors
+    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 disabled:opacity-40 disabled:pointer-events-none; }
+
+  .input { @apply w-full h-10 rounded-lg bg-white px-3 text-sm text-ink-900 ring-1 ring-ink-200 placeholder:text-ink-400
+    focus:outline-none focus:ring-2 focus:ring-brand-400 transition-shadow; }
+  .input-error { @apply ring-red-400 focus:ring-red-500; }
+  .label { @apply block text-[13px] font-medium text-ink-700 mb-1.5; }
+
+  .badge { @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap; }
+  .badge-green { @apply badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-600/15; }
+  .badge-red { @apply badge bg-red-50 text-red-700 ring-1 ring-red-600/15; }
+  .badge-amber { @apply badge bg-amber-50 text-amber-800 ring-1 ring-amber-600/20; }
+  .badge-neutral { @apply badge bg-ink-100 text-ink-700; }
+  .badge-blue { @apply badge bg-brand-50 text-brand-700 ring-1 ring-brand-500/15; }
+
+  .table-th { @apply px-4 py-3 text-left text-xs font-medium text-ink-500 uppercase tracking-wide; }
+  .table-td { @apply px-4 py-3.5 text-sm text-ink-800; }
+
+  .num { font-variant-numeric: tabular-nums; }
+}
+
+/* Veg / non-veg marker, as printed on Indian menus */
+.diet-mark { @apply inline-flex items-center justify-center h-3.5 w-3.5 rounded-[3px] border-[1.5px] shrink-0; }
+.diet-mark::after { content: ''; @apply h-1.5 w-1.5 rounded-full; background: currentColor; }
+
+/* Thin scrollbars for panels */
+.scroll-thin { scrollbar-width: thin; scrollbar-color: #d6d5cf transparent; }
+
+/* Recharts focus outline off — keyboard users get the table views instead */
+.recharts-wrapper *:focus { outline: none; }
+
+/* ---------- Printing ---------- */
+#print-root { display: none; }
+
+@media print {
+  @page { margin: 4mm; }
+  html, body { background: #fff !important; }
+  #root, [data-sonner-toaster] { display: none !important; }
+  #print-root { display: block !important; }
+}
